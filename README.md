@@ -31,14 +31,14 @@
 <br>**python manage.py runserver**
 <br>В терминале должен появиться текст:
 <br>System check identified no issues (0 silenced).
-<br>April **, **** - **:**:**
+<br>April \*\*, \*\*\*\* - \*\*:\*\*:\*\*
 <br>Django version 4.1.7, using settings 'mysite.settings'
 <br>Starting ASGI/Daphne version 4.0.0 development server at http://127.0.0.1:8000/
 <br>Quit the server with CTRL-BREAK.
 
 #### Порядок работы с сайтом через браузер:
 1. В адресной строке браузера введите http://127.0.0.1:8000/
-<br>
+
 *Работоспособность проверялась на браузерах:*
 - *Google Chrome 111.0.5563.111 (Official Build) (64-bit);*
 - *Microsoft Edge 111.0.1661.62 (Official Build) (64-bit).*

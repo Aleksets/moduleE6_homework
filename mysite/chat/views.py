@@ -1,15 +1,11 @@
-# import json
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-# from django.utils.safestring import mark_safe
-from django.views.generic import CreateView, UpdateView, DeleteView
-# from rest_framework import permissions, viewsets
+from django.views.generic import DeleteView
 from .forms import RoomCreateForm
 from .models import Room, ChatUser, Message
-# from .serializers import RoomSerializer, ChatUserSerializer, MessageSerializer
 
 
 # Представление для входа на сайт
@@ -49,20 +45,6 @@ def room_create(request):
         return render(request, 'room_create.html', {'form': form})
 
 
-# class RoomCreate(LoginRequiredMixin, CreateView):
-#     model = Room
-#     form_class = RoomCreateForm
-#     template_name = 'room_create.html'
-#     success_url = reverse_lazy('user_list')
-
-    # def form_valid(self, form):
-    #     self.object = form.save(commit=False)
-    #     # self.object.users.add()
-    #     # self.object.messages = []
-    #     self.object.save()
-    #     return super().form_valid(form)
-
-
 # Представление для обновления параметров (названия и списка пользователей) чата
 # Выполняется только для авторизованного пользователя, имеющего доступ к чату
 @login_required
@@ -83,19 +65,6 @@ def room_update(request, pk):
         return render(request, 'room_create.html', {'form': form})
 
 
-# class RoomUpdate(LoginRequiredMixin, UpdateView):
-#     model = Room
-#     form_class = RoomCreateForm
-#     template_name = 'room_create.html'
-#     success_url = reverse_lazy('user_list')
-#
-#     def get_object(self, queryset=None):
-#         obj = UpdateView.get_object(self, queryset=None)
-#         if self.request.user not in obj.get_user_list() and not self.request.user.is_staff:
-#             raise PermissionDenied
-#         return obj
-
-
 # Представление для удаления чата
 # Выполняется только для авторизованного пользователя, имеющего доступ к чату
 class RoomDelete(LoginRequiredMixin, DeleteView):
@@ -105,21 +74,6 @@ class RoomDelete(LoginRequiredMixin, DeleteView):
 
     def get_object(self, queryset=None):
         obj = DeleteView.get_object(self, queryset=None)
-        print(obj.get_user_list())
         if self.request.user not in obj.get_user_list() and not self.request.user.is_staff:
             raise PermissionDenied
         return obj
-
-# class RoomViewSet(viewsets.ModelViewSet):
-#     queryset = Room.objects.all()
-#     serializer_class = RoomSerializer
-#
-#
-# class ChatUserViewSet(viewsets.ModelViewSet):
-#     queryset = ChatUser.objects.all()
-#     serializer_class = ChatUserSerializer
-#
-#
-# class MessageViewSet(viewsets.ModelViewSet):
-#     queryset = Message.objects.all()
-#     serializer_class = MessageSerializer

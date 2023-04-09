@@ -14,13 +14,6 @@ class SignUpForm(UserCreationForm):
             "password2",
         )
 
-    # метод проверки на существование введенного при регистрации имени пользователя
-    # def clean_username(self):
-    #     username = self.cleaned_data.get('username')
-    #     if User.objects.filter(username=username).exists():
-    #         raise forms.ValidationError("This username already exists! Come up with a different username")
-    #     return username
-
 
 # Форма для изменения имени пользователя
 class UserEditForm(forms.ModelForm):

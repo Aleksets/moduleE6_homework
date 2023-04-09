@@ -25,7 +25,9 @@ def signup(request):
 # Представление для отображения профиля пользователя
 @login_required
 def profile(request):
-    if request.user not in ChatUser.objects.all():
+    # проверка, если пользователь зарегистрирован не через сайт (а, например, через cretesuperuser)
+    # в этом случае создаётся экземпляр класса ChatUser с request.user в поле user
+    if not ChatUser.objects.filter(user=request.user).exists():
         ChatUser.objects.create(user=request.user)
     return render(request, 'profile.html', {'user': ChatUser.objects.get(user=request.user)})
 
